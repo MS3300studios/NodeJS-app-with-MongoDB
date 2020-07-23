@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <title>My Blog</title>
+</head>
+<body ng-app='app'>
+    <div ng-controller='PostsCtrl' class="container">
+        <h1>Najnowsze posty</h1>
+        <button ng-click='addPost()' class="btn btn-default">Dodaj Post</button>
+        <input ng-model='postBody' class="form-control">
+        <ul class="list-group">
+            <li ng-repeat='kaczka in posts' class="list-group-item">
+                <strong>@{{kaczka.username}}</strong>
+                <span>{{kaczka.body}}</span>
+            </li>
+        </ul>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js"></script>
+<script>
+    var app = angular.module('app',[])
+    app.controller('PostsCtrl', function($scope){
+        $scope.posts = [
+            {
+                username: "dickeyxxx",
+                body: "Node rządzi!"
+            },
+            {
+                username: "jeffdickey",
+                body: "Testujemy AngularJS"
+            },
+            {
+                username: "Nick Strusinski",
+                body: "My additional Test Post"
+            }
+        ]
+        $scope.addPost = function () {
+            if($scope.postBody){
+            $scope.posts.unshift({
+                username: 'dickeyxxx',
+                body: $scope.postBody
+            })
+            }
+            else return{}
+            $scope.postBody = null
+        }
+        
+    })
+</script>
+</body>
+</html>
